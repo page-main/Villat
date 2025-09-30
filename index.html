@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Villat</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".fixed-top">
+
+  <header id="featured">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-transparent">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#featured"><img src="images/villat.png" alt="Villat Logo" height="60"> <span
+            class="brand-name">Villat</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="#featured">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#mission">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#staff">Why Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Articles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav> <!-- End of Navbar -->
+    <div id="carouselPets" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselPets" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselPets" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselPets" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <!-- <button type="button" data-bs-target="#carouselPets" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carouselPets" data-bs-slide-to="4" aria-label="Slide 5"></button> -->
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/villatt.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+          <img src="images/villat2.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+          <img src="images/villat3.png" class="d-block w-100">
+        </div>
+        <!-- <div class="carousel-item">
+          <img src="images/4.png" class="d-block w-100" alt="Fish">
+        </div> -->
+        <!-- <div class="carousel-item">
+          <img src="images/carousel-exoticanimals.jpg" class="d-block w-100" alt="Exotic Animals">
+        </div> -->
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselPets" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselPets" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div> <!-- End of Carousel -->
+  </header> <!-- End of Header -->
+
+  <div id="mission" class="section-common section-dark section-shadow section-border-top">
+    <div class="container">
+      <h2>About Us</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <p>With over 20 years of proven expertise, our company has been a trusted leader in construction, delivering
+            high-quality villas, residential apartments, and mosques. We bring together engineering precision,
+            architectural creativity, and a commitment to excellence, ensuring every project is built to last and
+            tailored to the client’s vision.</p>
+        </div>
+        <div class="col-md-6">
+          <p>Beyond construction, we provide full finishing solutions including carpentry, plumbing, electrical work,
+            painting, and decorative design. Our integrated services allow us to manage every stage of the project, from
+            foundation to final touches, offering clients a seamless experience and results that combine functionality
+            with elegance.</p>
+        </div>
+      </div> <!-- End of row -->
+      <div class="text-center mt-4">
+        <a href="#contact" class="btn btn-primary btn-lg px-4 me-md-2">Get a Quote</a>
+        <a href="#services" class="btn btn-outline-secondary btn-lg px-4">Our Services</a>
+      </div>
+    </div> <!-- End of Container -->
+  </div> <!-- End of Mission page -->
+
+  <div class="page section-common section-light section-shadow" id="services">
+    <h2>Services</h2>
+    <div class="container">
+      <div class="row">
+        <article class="col-lg-4 col-md-6">
+          <img class="icon" src="images/icon01.png" alt="Icon">
+          <h3>Construction</h3>
+          <p>Our expert team delivers durable structures for villas, apartments, and mosques, built with precision and
+            long-lasting quality.</p>
+        </article>
+
+        <article class="col-lg-4 col-md-6">
+          <img class="icon" src="images/icon02.png" alt="Icon">
+          <h3>Finishing</h3>
+          <p>We provide complete interior and exterior finishing, ensuring every detail matches your preferred style and
+            comfort.</p>
+        </article>
+
+        <article class="col-lg-4 col-md-6">
+          <img class="icon" src="images/icon03.png" alt="Icon">
+          <h3>Carpentry</h3>
+          <p>Our custom carpentry services bring elegance and functionality through doors, cabinets, flooring, and
+            decorative woodwork.</p>
+        </article>
+
+        <article class="col-lg-4 col-md-6">
+          <img class="icon" src="images/icon04.png" alt="Icon">
+          <h3>Plumbing</h3>
+          <p>We handle all plumbing installations and maintenance, guaranteeing efficient systems and reliable water
+            solutions.</p>
+        </article>
+
+        <article class="col-lg-4 col-md-6">
+          <img class="icon" src="images/icon05.png" alt="Icon">
+          <h3>Electrical</h3>
+          <p>Our electrical services cover safe wiring, lighting, and power systems designed to meet modern standards
+            and needs.</p>
+        </article>
+
+        <article class="col-lg-4 col-md-6">
+          <img class="icon" src="images/icon06.png" alt="Icon">
+          <h3>Painting</h3>
+          <p>We offer professional painting solutions, using premium materials to create beautiful finishes that last
+            for years.</p>
+        </article>
+      </div><!--end of row -->
+    </div><!--end of container -->
+  </div><!--end of services page -->
+
+  <div id="staff" class="section-common section-dark section-shadow">
+    <div class="container-fluid">
+      <h2>Why Us?</h2>
+      <div class="row">
+
+        <div class="doctor col-xl-4 ">
+          <div class="row">
+            <div class="col-md-4 col-xl-4 text-center">
+              <img src="images/why01.png" alt="Trusted Experience Icon">
+            </div>
+            <div class="col-md-8 col-xl-8">
+              <h3>Trusted Experience</h3>
+              <p>With over two decades in the construction and finishing field, our company has built a reputation for
+                excellence and reliability. From villas and apartments to mosques and commercial projects, our portfolio
+                reflects a wide range of successful work. Each project stands as proof of our dedication to quality,
+                precision, and the trust our clients place in us.</p>
+            </div>
+          </div> <!--row-->
+        </div> <!-- doctor -->
+
+        <div class="doctor col-xl-4 ">
+          <div class="row">
+            <div class="col-md-4 col-xl-4 text-center">
+              <img src="images/why02.png" alt="Competitive Prices Icon">
+            </div>
+            <div class="col-md-8 col-xl-8">
+              <h3>Competitive Prices</h3>
+              <p>We believe that quality construction should be accessible to everyone, which is why we offer flexible
+                and competitive pricing. Our goal is to provide the best value for money without compromising on
+                standards. Whether you are planning a small project or a large-scale build, we work with you to find
+                solutions that meet your needs and budget.</p>
+            </div>
+          </div> <!--row-->
+        </div> <!-- doctor -->
+
+        <div class="doctor col-xl-4 ">
+          <div class="row">
+            <div class="col-md-4 col-xl-4 text-center">
+              <img src="images/why03.png" alt="Guaranteed Deadlines Icon">
+            </div>
+            <div class="col-md-8 col-xl-8">
+              <h3>Guaranteed Deadlines</h3>
+              <p>Deadlines matter, and we take them seriously. Our team follows a structured process to ensure every
+                stage of construction and finishing is completed on time. By combining effective project management with
+                skilled craftsmanship, we guarantee that your property is delivered exactly as promised. This commitment
+                has earned us long-lasting relationships with satisfied clients.</p>
+            </div>
+          </div> <!--row-->
+        </div> <!-- doctor -->
+
+      </div> <!-- end of container-->
+    </div> <!-- end of row-->
+  </div><!-- end of staff page -->
+
+  <div class="page section-common section-dark section-shadow" id="projects">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Projects</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="project-card">
+            <img src="images/1.png" alt="Luxury Villa" class="img-fluid rounded">
+            <div class="project-info">
+              <h3>Luxury Villa</h3>
+              <p>Modern design with premium finishes</p>
+              <a href="gallery1.html" class="btn btn-sm btn-primary" target="_blank">View Details</a>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-4">
+          <div class="project-card">
+            <img src="images/2.png" alt="Commercial Building" class="img-fluid rounded">
+            <div class="project-info">
+              <h3>Commercial Building</h3>
+              <p>Functional space with elegant design</p>
+              <a href="gallery2.html" class="btn btn-sm btn-primary" target="_blank">View Details</a>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-md-4">
+          <div class="project-card">
+            <img src="images/3.png" alt="Modern Mosque" class="img-fluid rounded">
+            <div class="project-info">
+              <h3>Modern Mosque</h3>
+              <p>Elegant design with traditional elements</p>
+              <a href="gallery3.html" class="btn btn-sm btn-primary" target="_blank">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <a href="#contact" class="btn btn-primary btn-lg">Request a Custom Project</a>
+      </div>
+    </div>
+  </div><!-- end of projects page -->
+
+  <div class="page section-common section-light section-shadow" id="testimonials">
+    <div class="container-fluid">
+      <h2>Articles</h2>
+      <div class="row">
+
+        <blockquote class="col-lg-6 col-xl-3" id="janeh">
+          <div class="quote">
+            <span class="intro">Top 5 Tips Before Building Your Home</span>
+            <span class="more"> Before starting the journey of building a home, it is essential to plan carefully and
+              set clear priorities. Choosing the right location, hiring experienced contractors, and preparing a
+              realistic budget will save you from unexpected problems later on. It is also important to think ahead
+              about your lifestyle needs, such as future family size or special spaces you may want. By making these
+              decisions early, you ensure that your home reflects your vision and remains a place of comfort for years
+              to come.</span>
+            <!-- <span class="customer">Jane H.</span> -->
+          </div>
+        </blockquote>
+
+        <blockquote class="col-lg-6 col-xl-3" id="mcphersons">
+          <div class="quote">
+            <span class="intro">Full Finishing vs. Semi Finishing</span>
+            <span class="more">When buying or building a property, one of the most common questions is whether to go for
+              full finishing or semi finishing. A fully finished home is ready to move in, complete with paint,
+              flooring, and all utilities installed, saving time and effort. A semi-finished property, on the other
+              hand, gives you flexibility to choose your own designs and materials, but requires more investment and
+              supervision. The right choice depends on your budget, timeline, and how much control you want over the
+              final details.</span>
+            <!-- <span class="customer">The McPhersons</span> -->
+          </div>
+        </blockquote>
+
+        <blockquote class="col-lg-6 col-xl-3" id="johnb">
+          <div class="quote">
+            <span class="intro">Why Quality Materials Matter in Construction</span>
+            <span class="more">Many homeowners are tempted to cut costs by choosing cheaper materials, but this often
+              leads to problems in the long run. High-quality materials ensure durability, safety, and reduced
+              maintenance over time. For example, strong foundations, reliable electrical systems, and durable plumbing
+              protect your investment and provide peace of mind. While initial costs may be higher, quality choices save
+              you money and effort in the future. Building with the right materials means building for generations, not
+              just for today.</span>
+            <!-- <span class="customer">John B</span> -->
+          </div>
+        </blockquote>
+
+        <blockquote class="col-lg-6 col-xl-3" id="lorraines">
+          <div class="quote">
+            <span class="intro">The Value of Professional Finishing Services</span>
+            <span class="more">Finishing is not just about painting walls or installing floors; it is the stage that
+              gives your home its personality and comfort. Professional finishing services make sure every detail is
+              handled with care, from carpentry and plumbing to decorative touches. Skilled experts can translate your
+              ideas into practical designs that fit your budget and style. The difference between basic work and
+              professional finishing lies in precision, durability, and beauty. Investing in quality finishing
+              guarantees that your home truly feels like your own.</span>
+            <!-- <span class="customer">Lorraine S</span> -->
+          </div>
+        </blockquote>
+      </div><!--end of row-->
+    </div><!--end of container-->
+  </div><!-- end of testimonials page -->
+
+  <div class="page section-common section-light section-shadow" id="contact">
+    <div class="container">
+      <h2 class="text-center mb-5">Contact Us</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <form class="contact-form">
+            <div class="mb-3">
+              <label for="name" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Your Message</label>
+              <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your project"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>We're ready to bring your construction and finishing dreams to life. Contact us today to discuss your
+              project needs.</p>
+            <div class="mt-4">
+              <p><strong>Phone:</strong> <a href="tel:01001042335">01001042335</a></p>
+              <p><strong>Email:</strong> <a href="mailto:villat.official@gmail.com">villat.official@gmail.com</a></p>
+              <p><strong>Address:</strong> Cairo, Egypt</p>
+            </div>
+            <div class="social-icons mt-4">
+              <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end of contact page -->
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Contact Us</h4>
+          <p><i class="bi bi-telephone-fill"></i> <span class="phone">01001042335</span></p>
+          <p><i class="bi bi-envelope-fill"></i> <a
+              href="mailto:villat.official@gmail.com">villat.official@gmail.com</a></p>
+          <p><i class="bi bi-geo-alt-fill"></i> Cairo, Egypt</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#mission">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12 text-center">
+          <p class="copyright">All contents &copy; 2023 <a href="http://villat.eg">Villat</a>. All rights reserved.</p>
+        </div>
+      </div>
+    </div><!--container-->
+  </footer>
+
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/myscript.js"></script>
+</body>
+
+</html>

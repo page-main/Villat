@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gallery</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .thumb {
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .thumb img {
+            transition: transform .25s ease;
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+        }
+
+        .thumb:hover img {
+            transform: scale(1.05);
+        }
+
+        /* modal image container */
+        .viewer-img {
+            max-height: 75vh;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: transform .2s ease;
+        }
+
+        .viewer-wrap {
+            text-align: center;
+            position: relative;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1056;
+        }
+
+        .nav-left {
+            left: 15px;
+        }
+
+        .nav-right {
+            right: 15px;
+        }
+
+        .controls {
+            gap: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-4">
+        <h3 class="mb-3"> Gallery </h3>
+        <div class="row g-3" id="gallery"></div>
+    </div>
+
+    <!-- Viewer Modal -->
+    <div class="modal fade" id="viewerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-body viewer-wrap p-3">
+                    <button class="nav-btn nav-left" id="prevBtn" aria-label="السابق">❮</button>
+                    <img id="viewerImage" class="viewer-img" src="" alt="">
+                    <button class="nav-btn nav-right" id="nextBtn" aria-label="التالي">❯</button>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <div class="d-flex controls">
+                        <button class="btn btn-outline-light" id="zoomIn">+</button>
+                        <button class="btn btn-outline-light" id="zoomOut">−</button>
+                        <button class="btn btn-outline-light" id="resetZoom">Reset</button>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a id="downloadBtn" class="btn btn-success" download>Download </a>
+                        <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const images = [
+            'images/IMG/part2/1.JPG',
+            'images/IMG/part2/2.JPG',
+            'images/IMG/part2/3.JPG',
+            'images/IMG/part2/4.JPG',
+            'images/IMG/part2/5.JPG',
+            'images/IMG/part2/6.JPG',
+            'images/IMG/part2/7.JPG',
+            'images/IMG/part2/8.JPG',
+            'images/IMG/part2/9.JPG',
+            'images/IMG/part2/10.JPG',
+            'images/IMG/part2/11.JPG',
+            'images/IMG/part2/12.JPG',
+            'images/IMG/part2/13.JPG',
+            'images/IMG/part2/14.JPG',
+            'images/IMG/part2/15.JPG',
+            'images/IMG/part2/16.JPG',
+            'images/IMG/part2/17.JPG',
+            'images/IMG/part2/18.JPG',
+            'images/IMG/part2/19.JPG',
+            'images/IMG/part2/20.JPG'
+        ];
+
+        const galleryEl = document.getElementById('gallery');
+
+        images.forEach((src, i) => {
+            const col = document.createElement('div');
+            col.className = 'col-6 col-md-4 col-lg-3';
+            col.innerHTML = `
+        <div class="thumb rounded shadow-sm" data-index="${i}">
+          <img src="${src}" alt="image-${i}">
+        </div>`;
+            galleryEl.appendChild(col);
+        });
+
+        const viewerModal = new bootstrap.Modal(document.getElementById('viewerModal'));
+        const viewerImage = document.getElementById('viewerImage');
+        const downloadBtn = document.getElementById('downloadBtn');
+        let currentIndex = 0;
+        let scale = 1;
+
+        function openViewer(index) {
+            currentIndex = index;
+            scale = 1;
+            updateViewer();
+            viewerModal.show();
+        }
+
+        function updateViewer() {
+            const src = images[currentIndex];
+            viewerImage.src = src;
+            viewerImage.style.transform = `scale(${scale})`;
+            downloadBtn.href = src;
+            downloadBtn.setAttribute('download', `image-${currentIndex + 1}.jpg`);
+        }
+
+        document.querySelectorAll('.thumb').forEach(t => {
+            t.addEventListener('click', () => openViewer(Number(t.dataset.index)));
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            scale = 1; updateViewer();
+        });
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            scale = 1; updateViewer();
+        });
+
+        document.getElementById('zoomIn').addEventListener('click', () => { scale = Math.min(4, scale + 0.25); viewerImage.style.transform = `scale(${scale})`; });
+        document.getElementById('zoomOut').addEventListener('click', () => { scale = Math.max(0.5, scale - 0.25); viewerImage.style.transform = `scale(${scale})`; });
+        document.getElementById('resetZoom').addEventListener('click', () => { scale = 1; viewerImage.style.transform = `scale(${scale})`; });
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.querySelector('#viewerModal').classList.contains('show')) return;
+            if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
+            if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+            if (e.key === '+') document.getElementById('zoomIn').click();
+            if (e.key === '-') document.getElementById('zoomOut').click();
+        });
+
+        viewerImage.addEventListener('click', () => {
+            if (scale === 1) scale = 2;
+            else scale = 1;
+            viewerImage.style.transform = `scale(${scale})`;
+        });
+    </script>
+</body>
+
+</html>
