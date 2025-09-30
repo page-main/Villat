@@ -7,6 +7,8 @@
     <title>Gallery</title>
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/gallery-optimizations.css" rel="stylesheet">
     <style>
         body {
             background: #f8f9fa;
@@ -15,13 +17,20 @@
         .thumb {
             cursor: pointer;
             overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: block;
+            line-height: 0;
+            height: 200px;
         }
 
         .thumb img {
-            transition: transform .25s ease;
             width: 100%;
-            height: 170px;
+            height: 200px;
             object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
         }
 
         .thumb:hover img {
@@ -130,15 +139,139 @@
         ];
 
         const galleryEl = document.getElementById('gallery');
+        let loadedImages = 0;
+        let totalImages = images.length;
 
-        images.forEach((src, i) => {
+        // Create loading indicator
+        function showLoadingIndicator() {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loading-indicator';
+            loadingDiv.className = 'text-center my-4';
+            loadingDiv.innerHTML = `
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading images... <span id="load-progress">0/${totalImages}</span></p>
+            `;
+            galleryEl.parentNode.insertBefore(loadingDiv, galleryEl);
+        }
+
+        function updateLoadingProgress() {
+            const progressEl = document.getElementById('load-progress');
+            if (progressEl) {
+                progressEl.textContent = `${loadedImages}/${totalImages}`;
+            }
+            
+            if (loadedImages === totalImages) {
+                const loadingIndicator = document.getElementById('loading-indicator');
+                if (loadingIndicator) {
+                    loadingIndicator.remove();
+                }
+            }
+        }
+
+        // Intersection Observer for lazy loading
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const placeholder = img.previousElementSibling;
+                    
+                    // Load the actual image
+                    const actualImg = new Image();
+                    actualImg.onload = function() {
+                        img.src = this.src;
+                        img.style.opacity = '1';
+                        if (placeholder) placeholder.style.display = 'none';
+                        loadedImages++;
+                        updateLoadingProgress();
+                    };
+                    
+                    actualImg.onerror = function() {
+                        console.warn(`Failed to load image: ${img.dataset.src}`);
+                        if (placeholder) {
+                            placeholder.innerHTML = '<i class="bi bi-image" style="font-size: 24px;"></i><br><small>Image not found</small>';
+                            placeholder.style.background = '#f8f9fa';
+                        }
+                        loadedImages++;
+                        updateLoadingProgress();
+                    };
+                    
+                    actualImg.src = img.dataset.src;
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px' // Start loading 50px before the image enters viewport
+        });
+
+        function createImageElement(src, index) {
             const col = document.createElement('div');
             col.className = 'col-6 col-md-4 col-lg-3';
-            col.innerHTML = `
-        <div class="thumb rounded shadow-sm" data-index="${i}">
-          <img src="${src}" alt="image-${i}">
-        </div>`;
-            galleryEl.appendChild(col);
+            
+            const img = document.createElement('img');
+            img.dataset.src = src; // Store actual src in data attribute
+            img.src = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect width="1" height="1" fill="transparent"/></svg>'); // Transparent placeholder
+            img.alt = `Gallery image ${index + 1}`;
+            img.style.width = '100%';
+            img.style.height = '200px';
+            img.style.objectFit = 'cover';
+            img.style.display = 'block';
+            img.style.transition = 'transform .25s ease, opacity 0.3s ease';
+            img.style.opacity = '0';
+            
+            const thumbDiv = document.createElement('div');
+            thumbDiv.className = 'thumb';
+            thumbDiv.dataset.index = index;
+            
+            // Create placeholder
+            const placeholder = document.createElement('div');
+            placeholder.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 200px;
+                background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                           linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                           linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                           linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+                background-size: 20px 20px;
+                background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #999;
+                font-size: 12px;
+                z-index: 1;
+            `;
+            placeholder.innerHTML = '<div class="spinner-border spinner-border-sm" role="status"></div>';
+            
+            // Hover effect
+            thumbDiv.addEventListener('mouseenter', () => {
+                if (img.style.opacity === '1') {
+                    img.style.transform = 'scale(1.05)';
+                }
+            });
+            
+            thumbDiv.addEventListener('mouseleave', () => {
+                img.style.transform = 'scale(1)';
+            });
+            
+            thumbDiv.appendChild(placeholder);
+            thumbDiv.appendChild(img);
+            col.appendChild(thumbDiv);
+            
+            // Observe the image for lazy loading
+            imageObserver.observe(img);
+            
+            return col;
+        }
+
+        // Create gallery with error handling
+        images.forEach((src, i) => {
+            const imageElement = createImageElement(src, i);
+            galleryEl.appendChild(imageElement);
         });
 
         const viewerModal = new bootstrap.Modal(document.getElementById('viewerModal'));
@@ -156,14 +289,51 @@
 
         function updateViewer() {
             const src = images[currentIndex];
-            viewerImage.src = src;
-            viewerImage.style.transform = `scale(${scale})`;
-            downloadBtn.href = src;
-            downloadBtn.setAttribute('download', `image-${currentIndex + 1}.jpg`);
+            
+            // Show loading state
+            viewerImage.style.opacity = '0.5';
+            
+            // Create error handling for modal image
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                viewerImage.src = this.src;
+                viewerImage.style.opacity = '1';
+                viewerImage.style.transform = `scale(${scale})`;
+                downloadBtn.href = src;
+                downloadBtn.setAttribute('download', `image-${currentIndex + 1}.jpg`);
+            };
+            
+            tempImg.onerror = function() {
+                console.warn(`Failed to load modal image: ${src}`);
+                // Create SVG placeholder for modal
+                const svgPlaceholder = `data:image/svg+xml;base64,${btoa(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+                        <rect width="400" height="300" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+                        <text x="200" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6c757d">
+                            Image not available
+                        </text>
+                        <text x="200" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#adb5bd">
+                            ${src}
+                        </text>
+                    </svg>
+                `)}`;
+                viewerImage.src = svgPlaceholder;
+                viewerImage.style.opacity = '1';
+                viewerImage.style.transform = `scale(${scale})`;
+                downloadBtn.href = '#';
+                downloadBtn.setAttribute('download', '');
+            };
+            
+            tempImg.src = src;
         }
 
-        document.querySelectorAll('.thumb').forEach(t => {
-            t.addEventListener('click', () => openViewer(Number(t.dataset.index)));
+        // Event delegation for dynamically created elements
+        galleryEl.addEventListener('click', function(e) {
+            const thumb = e.target.closest('.thumb');
+            if (thumb) {
+                const index = parseInt(thumb.dataset.index);
+                openViewer(index);
+            }
         });
 
         document.getElementById('prevBtn').addEventListener('click', () => {
