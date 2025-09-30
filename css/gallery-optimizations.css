@@ -81,14 +81,86 @@
     contain: layout style paint;
 }
 
-/* Optimize for mobile */
-@media (max-width: 768px) {
+/* Responsive design for different screen sizes */
+@media (max-width: 576px) {
+    /* Extra small devices (phones) */
     .thumb {
+        height: 120px !important;
+        min-height: 120px;
+    }
+    
+    .thumb img {
+        height: 120px;
+    }
+    
+    .placeholder-pattern {
+        background-size: 12px 12px;
+    }
+    
+    /* Modal optimizations for mobile */
+    .modal-xl {
+        max-width: 95%;
+        margin: 0.5rem;
+    }
+    
+    .viewer-img {
+        max-height: 60vh;
+        max-width: 100%;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    .nav-left {
+        left: 5px;
+    }
+    
+    .nav-right {
+        right: 5px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .controls {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    /* Small devices (tablets) */
+    .thumb {
+        height: 150px !important;
         min-height: 150px;
+    }
+    
+    .thumb img {
+        height: 150px;
     }
     
     .placeholder-pattern {
         background-size: 15px 15px;
+    }
+    
+    .viewer-img {
+        max-height: 70vh;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    /* Medium devices */
+    .thumb {
+        height: 180px !important;
+        min-height: 180px;
+    }
+    
+    .thumb img {
+        height: 180px;
     }
 }
 

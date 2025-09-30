@@ -319,24 +319,30 @@
       <h2 class="text-center mb-5">Contact Us</h2>
       <div class="row">
         <div class="col-md-6">
-          <form class="contact-form">
+          <form class="contact-form" action="https://formspree.io/f/xnngdwza" method="POST"
+            id="contactForm">
             <div class="mb-3">
               <label for="name" class="form-label">Your Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Enter your name">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="mb-3">
               <label for="phone" class="form-label">Phone Number</label>
-              <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+              <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number">
             </div>
             <div class="mb-3">
               <label for="message" class="form-label">Your Message</label>
-              <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your project"></textarea>
+              <textarea class="form-control" id="message" name="message" rows="5"
+                placeholder="Tell us about your project" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <div id="form-status" class="mb-3" style="display: none;"></div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span id="submitText">Send Message</span>
+              <span id="submitSpinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
+            </button>
           </form>
         </div>
         <div class="col-md-6">
